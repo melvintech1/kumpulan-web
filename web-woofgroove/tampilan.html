@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WoofGroove - Tali Kekang Bebas Genggam Premium</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Variabel & Reset */
+        :root {
+            --dark-gray: #606060;
+            --light-gray: #f5f5f5;
+            --white: #ffffff;
+            --accent: #4a90e2;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--dark-gray);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background-color: var(--white);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-weight: 800;
+            font-size: 24px;
+            color: var(--dark-gray);
+            text-decoration: none;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-menu li {
+            margin-left: 30px;
+        }
+        
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--dark-gray);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-menu a:hover {
+            color: var(--accent);
+        }
+        
+        .cta-button {
+            background-color: var(--accent);
+            color: var(--white);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        .cta-button:hover {
+            background-color: #3a7bc8;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(245,245,245,0.9) 0%, rgba(255,255,255,0.8) 100%), url('https://images.unsplash.com/photo-1543466835-00a7907e9de1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80') no-repeat center center/cover;
+            padding: 180px 0 100px;
+            text-align: center;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: var(--dark-gray);
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: var(--dark-gray);
+        }
+        
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .btn-primary {
+            background-color: var(--accent);
+            color: var(--white);
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary:hover {
+            background-color: #3a7bc8;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--dark-gray);
+            border: 2px solid var(--dark-gray);
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--dark-gray);
+            color: var(--white);
+            transform: translateY(-3px);
+        }
+        
+        /* Brand Story */
+        .brand-story {
+            padding: 100px 0;
+            background-color: var(--white);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--dark-gray);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+        
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent);
+        }
+        
+        .brand-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .brand-text {
+            flex: 1;
+        }
+        
+        .brand-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--dark-gray);
+        }
+        
+        .brand-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .brand-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s;
+        }
+        
+        .brand-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* Product Features */
+        .product-features {
+            padding: 100px 0;
+            background-color: var(--light-gray);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .feature-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--dark-gray);
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 100px 0;
+            background-color: var(--white);
+        }
+        
+        .testimonial-slider {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .testimonial {
+            text-align: center;
+            padding: 40px;
+            background-color: var(--light-gray);
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--dark-gray);
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--accent) 0%, #3a7bc8 100%);
+            color: var(--white);
+            text-align: center;
+        }
+        
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-gray);
+            color: var(--white);
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--accent);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column a {
+            color: var(--light-gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: var(--accent);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--accent);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .brand-content {
+                flex-direction: column;
+            }
+            
+            .brand-text, .brand-image {
+                flex: none;
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero {
+                padding: 150px 0 80px;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-menu {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .btn-primary, .btn-secondary {
+                padding: 12px 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">WoofGroove</a>
+            <ul class="nav-menu">
+                <li><a href="#">Beranda</a></li>
+                <li><a href="#">Produk</a></li>
+                <li><a href="#">Tentang</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Kontak</a></li>
+            </ul>
+            <a href="#" class="cta-button">Beli Sekarang</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>Kebebasan Bergerak untuk Anda dan Sahabat Anda</h1>
+            <p>Tali kekang revolusioner yang menggabungkan desain premium, teknologi inovatif, dan kebebasan tanpa batas untuk gaya hidup aktif Anda.</p>
+            <div class="hero-buttons">
+                <a href="#" class="btn-primary">Beli Sekarang</a>
+                <a href="#" class="btn-secondary">Pelajari Lebih Lanjut</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brand Story -->
+    <section class="brand-story">
+        <div class="container">
+            <div class="section-title">
+                <h2>Cerita Kami</h2>
+            </div>
+            <div class="brand-content">
+                <div class="brand-text">
+                    <h3>Menggabungkan Gaya Hidup Aktif dengan Teknologi Masa Depan</h3>
+                    <p>WoofGroove lahir dari passion terhadap hewan peliharaan dan gaya hidup aktif. Kami memahami bahwa pemilik hewan peliharaan modern menginginkan produk yang tidak hanya fungsional tetapi juga stylish dan inovatif.</p>
+                    <p>Dengan tali kekang bebas genggam kami, Anda dapat menikmati waktu berkualitas dengan anjing Anda sambil tetap bebas melakukan aktivitas lainnya. Desain futuristik kami menggabungkan material premium dengan teknologi canggih untuk pengalaman berjalan-jalan yang tak tertandingi.</p>
+                    <a href="#" class="btn-primary">Tentang Kami</a>
+                </div>
+                <div class="brand-image">
+                    <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="People running with dogs on beach">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Features -->
+    <section class="product-features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Fitur Unggulan</h2>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-hand-holding-heart"></i>
+                    </div>
+                    <h3>Bebas Genggam</h3>
+                    <p>Desain hands-free memungkinkan Anda beraktivitas dengan leluasa sambil menjaga kontrol penuh atas pergerakan anjing Anda.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Material Premium</h3>
+                    <p>Dibuat dari bahan berkualitas tinggi yang tahan lama, nyaman, dan aman untuk anjing Anda dalam segala kondisi.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Responsif & Aman</h3>
+                    <p>Sistem penyesuaian yang cepat dan mekanisme penguncian yang aman memastikan kenyamanan dan keamanan maksimal.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>Apa Kata Pelanggan</h2>
+            </div>
+            <div class="testimonial-slider">
+                <div class="testimonial">
+                    <p class="testimonial-text">"Sebagai seorang pelari yang aktif dengan golden retriever saya, WoofGroove telah mengubah pengalaman berlari kami. Desainnya yang ergonomis dan material premium membuatnya nyaman untuk kami berdua."</p>
+                    <p class="testimonial-author">- Andi, Jakarta</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Tingkatkan Pengalaman Jalan-Jalan Anda</h2>
+            <p>Bergabunglah dengan ribuan pemilik hewan peliharaan yang telah merasakan manfaat tali kekang revolusioner kami. Pesan sekarang dan dapatkan gratis pengiriman untuk pembelian pertama.</p>
+            <a href="#" class="btn-secondary">Beli Tali Kekang</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>WoofGroove</h3>
+                    <p>Menyediakan produk inovatif dan premium untuk gaya hidup aktif Anda dan sahabat berkaki empat.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Produk</h3>
+                    <ul>
+                        <li><a href="#">Tali Kekang Bebas Genggam</a></li>
+                        <li><a href="#">Aksesoris Anjing</a></li>
+                        <li><a href="#">Koleksi Terbaru</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Bantuan</h3>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Pengembalian</a></li>
+                        <li><a href="#">Pengiriman</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Hubungi Kami</h3>
+                    <ul>
+                        <li><a href="#">info@woofgroove.com</a></li>
+                        <li><a href="#">+62 21 1234 5678</a></li>
+                        <li>
+                            <div class="social-links">
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 WoofGroove. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple JavaScript for mobile menu toggle (can be expanded)
+        document.addEventListener('DOMContentLoaded', function() {
+            // You can add any interactive functionality here
+            console.log('WoofGroove website loaded successfully!');
+        });
+    </script>
+</body>
+</html>
