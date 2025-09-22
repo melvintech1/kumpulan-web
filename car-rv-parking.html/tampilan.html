@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ParkirKu - Solusi Parkir Jangka Panjang</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --success: #2ecc71;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            color: var(--secondary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 25px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--secondary);
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 8px 20px;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-outline {
+            border: 2px solid white;
+            color: white;
+            background: transparent;
+        }
+        
+        .btn-outline:hover {
+            background: white;
+            color: var(--primary);
+        }
+        
+        .btn-primary {
+            background: var(--secondary);
+            color: white;
+            border: 2px solid var(--secondary);
+        }
+        
+        .btn-primary:hover {
+            background: #2980b9;
+            border-color: #2980b9;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.8)), url('https://images.unsplash.com/photo-1566842600175-97dca3dfc3c7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        /* Booking Widget */
+        .booking-widget {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            max-width: 900px;
+            margin: -50px auto 50px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .booking-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .booking-steps::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #eee;
+            z-index: 1;
+        }
+        
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .step-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-bottom: 8px;
+            transition: all 0.3s;
+        }
+        
+        .step.active .step-number {
+            background: var(--secondary);
+            color: white;
+        }
+        
+        .step.completed .step-number {
+            background: var(--success);
+            color: white;
+        }
+        
+        .step-text {
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .booking-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--secondary);
+        }
+        
+        .vehicle-type-selector {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .vehicle-option {
+            flex: 1;
+            text-align: center;
+            padding: 20px;
+            border: 2px solid #eee;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .vehicle-option:hover {
+            border-color: var(--secondary);
+        }
+        
+        .vehicle-option.selected {
+            border-color: var(--secondary);
+            background: rgba(52, 152, 219, 0.1);
+        }
+        
+        .vehicle-option i {
+            font-size: 32px;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        
+        .vehicle-option.selected i {
+            color: var(--secondary);
+        }
+        
+        .btn-large {
+            padding: 15px 25px;
+            font-size: 18px;
+            grid-column: span 2;
+            margin-top: 15px;
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--dark);
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            color: #777;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            text-align: center;
+            padding: 30px;
+            border-radius: 8px;
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 40px;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        /* Pricing Section */
+        .pricing {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        
+        .pricing-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .pricing-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .pricing-header {
+            background: var(--primary);
+            color: white;
+            padding: 25px;
+        }
+        
+        .pricing-header h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .price {
+            font-size: 40px;
+            font-weight: 700;
+            margin: 15px 0;
+        }
+        
+        .price-duration {
+            font-size: 16px;
+            font-weight: normal;
+        }
+        
+        .pricing-features {
+            padding: 25px;
+        }
+        
+        .pricing-features ul {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+        
+        .pricing-features ul li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--secondary);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-column ul li a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--secondary);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #444;
+            color: #bbb;
+            font-size: 14px;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .booking-form {
+                grid-template-columns: 1fr;
+            }
+            
+            .btn-large {
+                grid-column: 1;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+                justify-content: center;
+            }
+            
+            .auth-buttons {
+                margin-top: 20px;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .vehicle-type-selector {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-parking"></i>
+                    <span>ParkirKu</span>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Lokasi</a></li>
+                        <li><a href="#">Harga</a></li>
+                        <li><a href="#">Tentang Kami</a></li>
+                        <li><a href="#">Kontak</a></li>
+                    </ul>
+                </nav>
+                <div class="auth-buttons">
+                    <a href="#" class="btn btn-outline">Masuk</a>
+                    <a href="#" class="btn btn-primary">Daftar</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Parkir Aman untuk Kendaraan Anda</h1>
+            <p>Layanan parkir jangka panjang terpercaya dengan keamanan 24/7 untuk mobil dan RV Anda</p>
+        </div>
+    </section>
+
+    <!-- Booking Widget -->
+    <div class="container">
+        <div class="booking-widget">
+            <div class="booking-steps">
+                <div class="step active">
+                    <div class="step-number">1</div>
+                    <div class="step-text">Pilih Kendaraan</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-text">Pilih Tanggal</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-text">Pilih Tempat</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-text">Bayar</div>
+                </div>
+            </div>
+
+            <div class="vehicle-type-selector">
+                <div class="vehicle-option selected">
+                    <i class="fas fa-car"></i>
+                    <h3>Mobil</h3>
+                    <p>Parkir harian, mingguan, bulanan</p>
+                </div>
+                <div class="vehicle-option">
+                    <i class="fas fa-rv"></i>
+                    <h3>RV / Motorhome</h3>
+                    <p>Parkir luas dengan fasilitas lengkap</p>
+                </div>
+            </div>
+
+            <form class="booking-form">
+                <div class="form-group">
+                    <label for="check-in">Check-in</label>
+                    <input type="date" id="check-in" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="check-out">Check-out</label>
+                    <input type="date" id="check-out" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="vehicle-type">Tipe Kendaraan</label>
+                    <select id="vehicle-type" class="form-control">
+                        <option value="">Pilih Tipe Kendaraan</option>
+                        <option value="car">Mobil Standard</option>
+                        <option value="suv">SUV</option>
+                        <option value="truck">Truk</option>
+                        <option value="rv">RV / Motorhome</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="duration">Durasi Parkir</label>
+                    <select id="duration" class="form-control">
+                        <option value="">Pilih Durasi</option>
+                        <option value="daily">Harian</option>
+                        <option value="weekly">Mingguan</option>
+                        <option value="monthly">Bulanan</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary btn-large">Cek Ketersediaan</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Mengapa Memilih ParkirKu?</h2>
+                <p>Kami menyediakan layanan parkir terbaik dengan standar keamanan tinggi dan kenyamanan untuk kendaraan Anda</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Keamanan 24/7</h3>
+                    <p>Area parkir kami diawasi CCTV 24 jam dengan petugas keamanan berkeliling</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-truck-loading"></i>
+                    </div>
+                    <h3>Fasilitas Lengkap</h3>
+                    <p>Area khusus untuk RV dengan akses listrik, air, dan pembuangan kotoran</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <h3>Booking Online</h3>
+                    <p>Pesan tempat parkir Anda kapan saja melalui website kami</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing">
+        <div class="container">
+            <div class="section-title">
+                <h2>Harga Parkir</h2>
+                <p>Kami menawarkan berbagai pilihan paket parkir dengan harga kompetitif</p>
+            </div>
+            <div class="pricing-options">
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Mobil Harian</h3>
+                        <div class="price">Rp 25.000<span class="price-duration">/hari</span></div>
+                        <p>Parkir harian untuk mobil</p>
+                    </div>
+                    <div class="pricing-features">
+                        <ul>
+                            <li>Keamanan 24/7</li>
+                            <li>Area Tertutup</li>
+                            <li>Bebas Akses 1x</li>
+                            <li>Tidak Termasuk Perawatan</li>
+                        </ul>
+                        <a href="#" class="btn btn-primary">Pilih Paket</a>
+                    </div>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Mobil Bulanan</h3>
+                        <div class="price">Rp 400.000<span class="price-duration">/bulan</span></div>
+                        <p>Parkir bulanan untuk mobil</p>
+                    </div>
+                    <div class="pricing-features">
+                        <ul>
+                            <li>Keamanan 24/7</li>
+                            <li>Area Tertutup</li>
+                            <li>Akses Tidak Terbatas</li>
+                            <li>Perawatan Mingguan</li>
+                        </ul>
+                        <a href="#" class="btn btn-primary">Pilih Paket</a>
+                    </div>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>RV Bulanan</h3>
+                        <div class="price">Rp 800.000<span class="price-duration">/bulan</span></div>
+                        <p>Parkir bulanan untuk RV</p>
+                    </div>
+                    <div class="pricing-features">
+                        <ul>
+                            <li>Keamanan 24/7</li>
+                            <li>Area Khusus RV</li>
+                            <li>Akses Listrik & Air</li>
+                            <li>Fasilitas Pembuangan</li>
+                        </ul>
+                        <a href="#" class="btn btn-primary">Pilih Paket</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>ParkirKu</h3>
+                    <p>Layanan parkir jangka panjang terpercaya dengan keamanan 24/7 untuk kendaraan Anda.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Tautan Cepat</h3>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Lokasi</a></li>
+                        <li><a href="#">Harga</a></li>
+                        <li><a href="#">Tentang Kami</a></li>
+                        <li><a href="#">Kontak</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Kontak Kami</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Jl. Parkir Raya No. 123, Jakarta</li>
+                        <li><i class="fas fa-phone"></i> +62 21 1234 5678</li>
+                        <li><i class="fas fa-envelope"></i> info@parkirku.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 ParkirKu. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript untuk interaksi pada halaman
+        document.addEventListener('DOMContentLoaded', function() {
+            // Vehicle type selection
+            const vehicleOptions = document.querySelectorAll('.vehicle-option');
+            vehicleOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    vehicleOptions.forEach(opt => opt.classList.remove('selected'));
+                    this.classList.add('selected');
+                });
+            });
+            
+            // Set minimum date for check-in to today
+            const today = new Date();
+            const tomorrow = new Date(today);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            
+            const checkInInput = document.getElementById('check-in');
+            const checkOutInput = document.getElementById('check-out');
+            
+            const formatDate = (date) => {
+                return date.toISOString().split('T')[0];
+            };
+            
+            checkInInput.min = formatDate(today);
+            checkOutInput.min = formatDate(tomorrow);
+            
+            // Set check-in to today and check-out to tomorrow by default
+            checkInInput.value = formatDate(today);
+            checkOutInput.value = formatDate(tomorrow);
+            
+            // Form submission
+            const bookingForm = document.querySelector('.booking-form');
+            bookingForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Fitur booking akan diproses. Dalam implementasi lengkap, ini akan menampilkan ketersediaan tempat parkir.');
+            });
+        });
+    </script>
+</body>
+</html>
